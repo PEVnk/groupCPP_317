@@ -23,3 +23,14 @@ a)
 6 (x + y = 3 + 3)
 3 (x) 
 0 или мусор, т.к. z  не присвоено значение
+b) 1
+c) 2
+d) 
+Bit 1 has value: 1
+Bit 3 has value: 0
+Bit 7 has value: 0
+All the bits: 00000001
+e)
+a: 2 
+b: 2 
+c: 3 
