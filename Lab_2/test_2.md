@@ -9,7 +9,7 @@ int л = 4;
 }
 ```
 исправленный код
-```
+```cpp
 #include <iostream>
 int main() {
 int a;
