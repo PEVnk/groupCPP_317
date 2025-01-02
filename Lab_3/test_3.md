@@ -93,20 +93,37 @@ return 0;
 ```
 вывод: O_o
 
-d)
+d) неправильный код
+```cpp
 #include <iostream>
 int getNumbers()
 {
 return 6;
 return 8;
-}i
-nt main()
+}
+int main()
 {
 std::cout << getNumbers() << std::endl;
 std::cout << getNumbers() << std::endl;
 std::cout << getNumbers << std::endl;
 return 0;
 }
+```
+исправленный код
+```cpp
+#include <iostream>
+int getNumbers(){
+    return 6;
+}
+int main(){
+    std::cout << getNumbers() << std::endl;
+    std::cout << getNumbers() << std::endl;
+    std::cout << getNumbers() << std::endl;
+    return 0;
+}
+```
+вывод: 6 6 6
+
 e)
 int main()
 {
