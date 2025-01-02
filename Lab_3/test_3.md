@@ -1,16 +1,34 @@
-a)
+a) неправильный код
+```cpp
 #include <iostream>
 int return 5(){
 return 5;
-}i
-nt return8(){
+}
+int return8(){
 return;
-}i
-nt main(){
+}
+int main(){
 std::cout << (return5() + return8() ) << std::endl;
 return 0
 }
-b)
+```
+исправленный код
+```cpp
+#include <iostream>
+int return5(){
+return 5;
+}
+int return8(){
+return 8;
+}
+int main(){
+std::cout << (return5() + return8() ) << std::endl;
+return 0;
+}
+```
+вывод: 13
+b) неправильный код
+```cpp
 int return() {
 return 5;
 int return()
@@ -19,11 +37,33 @@ int k ;
 k{3};
 return k;
 }
-}i
-nt main(){
+}
+int main(){
 std::cout << return() << std::endl;
 std::cout << return() << std::endl;
 }
+```
+исправленный код
+```cpp
+#include <iostream>
+
+int return1() {
+    return 5;
+}
+
+int return2() {
+    int k{3}; 
+    return k;
+}
+
+int main() {
+    std::cout << return1() << std::endl; 
+    std::cout << return2() << std::endl; 
+    return 0;
+}
+```
+вывод: 5 3
+
 c)
 #include <iostream>
 void prints
