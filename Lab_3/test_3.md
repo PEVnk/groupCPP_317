@@ -124,7 +124,8 @@ int main(){
 ```
 вывод: 6 6 6
 
-e)
+e) неправильный код
+```cpp
 int main()
 {
 std::cout << multiply(7, 8) << std::endl;
@@ -141,7 +142,27 @@ constexpr int y(x); // в дальнейшем переменная usersAge н�
 std::cout << y << std::endl;
 return 0;
 }
-f)
+```
+исправленный код
+```cpp
+#include <iostream>
+int multiply(int a, int b){
+    return a*b;
+}
+int main(){
+    std::cout << multiply(7, 8) << std::endl;
+    int x;
+    std::cin >> x;
+    const int y(x); // в дальнейшем переменная usersAge не может быть изменена
+    std::cout << y << std::endl;
+    return 0;
+}
+```
+вывод: 56 
+введенное пользователем значение х
+
+f) неправильный код
+```cpp
 #include <iostream>
 #define VALUE 1
 int main() {
