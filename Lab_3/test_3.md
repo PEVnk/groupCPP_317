@@ -27,6 +27,7 @@ return 0;
 }
 ```
 вывод: 13
+
 b) неправильный код
 ```cpp
 int return() {
@@ -64,18 +65,34 @@ int main() {
 ```
 вывод: 5 3
 
-c)
+c) неправильный код
+```cpp
 #include <iostream>
 void prints
 ()
 {
 std::cout << 'O_o' << std::endl;
-}i
-nt main ()
-{
+}
+int main         ()
+                {
 std::cout << prints() << std::endl;
 return 0;
 }
+```
+исправленный код
+```cpp
+#include <iostream>
+void print(){
+    std::cout << "O_o" << std::endl;
+}
+int main(){
+    print();
+return 0;
+}
+
+```
+вывод: O_o
+
 d)
 #include <iostream>
 int getNumbers()
