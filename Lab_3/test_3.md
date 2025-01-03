@@ -217,7 +217,8 @@ int main() {
 ```
 вывод: MIX
 
-h)
+h)неправильный код
+```cpp
 #include <iostream>
 namespace DoMath
 {
@@ -232,10 +233,31 @@ int add(int x, int y)
 {
 return x | y;
 }
-}i
-nt main(void)
+}
+int main(void)
 {
 std::cout << DoMath::add(5, 4) << '\n';
 std::cout << DoMath::subtract(5, 4) << '\n';
 return 0;
 }
+```
+исправленный код
+```cpp
+#include <iostream>
+namespace DoMath{
+  int subtract(int x, int y){
+    return x-y;
+  }
+
+
+  int add(int x, int y){
+    return x+y;
+  }
+}
+int main(void){
+  std::cout << DoMath::add(5, 4) << '\n';
+  std::cout << DoMath::subtract(5, 4) << '\n';
+  return 0;
+}
+```
+вывод: 9  1
