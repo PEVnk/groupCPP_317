@@ -1,3 +1,4 @@
+Задание 3.1.
 a) неправильный код
 ```cpp
 #include <iostream>
@@ -261,3 +262,48 @@ int main(void){
 }
 ```
 вывод: 9  1
+
+Задание 3.2.
+неправильный код
+```cpp
+#include <iostream>
+int tmp = 1;
+int getNumbers( {
+int tmp = 1;
+return 8;
+}
+int main()
+{
+int tmp = 3;
+
+std::cout << tmp << "Чтобы программа скомпилилась нужно что-то добавить а нельзя удалять и комментировать "<< std::endl;
+
+return 0;
+```
+исправленный код
+```cpp
+#include <iostream>
+int tmp = 1;
+int getNumbers(){
+    int tmp = 1;
+    return 8;
+}
+int main(){
+    
+    int tmp = 3;
+    std::cout << "Глобальная переменная tmp: " << ::tmp << std::endl;
+
+    std::cout << "Локальная переменная tmp: " << tmp << std::endl;
+   
+    std::cout << "Результат функции getNumbers: " << getNumbers() << std::endl;
+    
+    std::cout << tmp << " Чтобы программа скомпилилась нужно что-то добавить а нельзя удалять и комментировать "<< std::endl;
+
+    return 0;
+}
+```
+вывод:
+Глобальная переменная tmp: 1
+Локальная переменная tmp: 3
+Результат функции getNumbers: 8
+3 Чтобы программа скомпилилась нужно что-то добавить а нельзя удалять и комментировать
