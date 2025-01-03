@@ -161,7 +161,7 @@ int main(){
 вывод: 56 
 введенное пользователем значение х
 
-f) неправильный код
+f) в представленном коде ошибок нет
 ```cpp
 #include <iostream>
 #define VALUE 1
@@ -174,7 +174,11 @@ std::cout << VALUE <<"\n";
 std::cout << VALUE <<"\n";
 #endif
 }
-g)
+```
+вывод:  1
+
+g) неправильный код
+```cpp
 #include <iostream>
 namespace Mix {
 enum class Fruits {
@@ -185,12 +189,34 @@ enum class Colors {
 RED,
 BLACK
 };
-}i
-nt main() {
+}
+int main() {
 Fruits fruit = Fruits::LEMON;
 std::cout << "MIX\n";
 return 1;
 }
+```
+исправленный код
+```cpp
+#include <iostream>
+namespace Mix {
+enum class Fruits {
+  LEMON,
+  APPLE
+};
+enum class Colors {
+  RED,
+  BLACK
+};
+}
+int main() {
+  Mix::Fruits fruit = Mix::Fruits::LEMON;
+  std::cout << "MIX\n";
+  return 0;
+}
+```
+вывод: MIX
+
 h)
 #include <iostream>
 namespace DoMath
