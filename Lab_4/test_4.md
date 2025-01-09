@@ -183,3 +183,43 @@ std::cout << 5 << '\n'; // и это
 }}
 ```
 вывод: 2  3  4  5
+
+c)
+```cpp
+#include <iostream>
+const int size = 5;
+void Func(int *ptr, int size) {
+for (int i = 0; i < size; ++i)
+std::cout << ptr[i] << '\n';
+*ptr = 5;
+std::cout << '\n';
+for (int i = 0; i < size; ++i)
+std::cout << *(ptr++) << '\n';
+*ptr = 55;
+std::cout << '\n';
+}
+int main() {
+int array[size]{1,3,5,7,9};
+Func(array, size);
+for (int i = 0; i < size; ++i)
+std::cout << array[i] << '\n';
+}
+```
+вывод: 
+1
+3
+5
+7
+9
+
+5
+3
+5
+7
+9
+
+5
+3
+5
+7
+9
