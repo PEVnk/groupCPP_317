@@ -61,3 +61,35 @@ p = value;
 ```
 исправленный код
 ```cpp
+#include <iostream>
+int main() {
+short value;
+short *p;
+p = &value;
+*p = value;
+*p = *&value;
+}
+```
+d) неправильный код
+```cpp
+#include <iostream>
+int main() {
+short value;
+short *p;
+p = value;
+*p = value;
+*p = &value;
+*p = *&value;
+}
+```
+исправленный код
+```cpp
+#include <iostream>
+int main() {
+short value;
+short *p;
+p = &value;
+*p = value;
+*p = *&value;
+}
+```
