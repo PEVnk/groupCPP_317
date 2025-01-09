@@ -153,3 +153,33 @@ int *ptr = &value;
 ptr = &value;
 }
 ```
+Задание 4.2.  
+a) 
+```cpp
+#include <cstdlib> // нужно для функции exit()
+#include <iostream>
+int main() {
+std::cout << "Hi !\n";
+exit(0); // завершает выполнение программы и возвращает операционной системе 0
+std::cout << 3;
+}
+```
+вывод: Hi !  
+b)
+```cpp
+#include <iostream>
+int main() {
+switch (2) {
+case 1: // Не совпадает!
+std::cout << 1 << '\n'; // пропускается
+case 2: // Совпало!
+std::cout << 2 << '\n'; // выполнение кода начинается здесь
+case 3:
+std::cout << 3 << '\n'; // это также выполнится
+case 4:
+std::cout << 4 << '\n'; // и это
+default:
+std::cout << 5 << '\n'; // и это
+}}
+```
+вывод: 2  3  4  5
