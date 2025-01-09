@@ -1,4 +1,4 @@
-Задание 3.1.  
+Задание 4.1.  
 a) неправильный код
 ```cpp
 #include <iostream>
@@ -31,6 +31,32 @@ std::cout << *ptr[i] << '\n';
 int main() {
 int array[size]{1,3,5,7,9};
 Func(&array, size);
+}
+```
+исправленный код
+```cpp
+#include <iostream>
+const int size = 5;
+void Func(int array[size], const int size) {
+for (int i = 0; i < size; ++i)
+std::cout << array << '\n';
+}
+int main() {
+int array[size]{1,3,5,7,9};
+int *ptr = array;
+Func(ptr, size);
+}
+```
+c) неправильный код
+```cpp
+#include <iostream>
+int main() {
+short value;
+short *p;
+p = value;
+*p = value;
+*p = &value;
+*p = *&value;
 }
 ```
 исправленный код
