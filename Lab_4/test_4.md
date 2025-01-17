@@ -37,14 +37,13 @@ Func(&array, size);
 ```cpp
 #include <iostream>
 const int size = 5;
-void Func(int array[size], const int size) {
+void Func(int *ptr, int size) {
 for (int i = 0; i < size; ++i)
-std::cout << array << '\n';
+std::cout << ptr[i] << '\n';
 }
 int main() {
 int array[size]{1,3,5,7,9};
-int *ptr = array;
-Func(ptr, size);
+Func(array, size);
 }
 ```
 c) неправильный код
