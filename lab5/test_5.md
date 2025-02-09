@@ -8,18 +8,18 @@ pj = (char*)&a;
 std::cout << *pj << '\n';
 }
 ```
-происходит потеря данных из-за попытки вывести значение переменной типа float как char. Это приводит к некорректному отображению в памяти.
+
 исправленный код:
 ```cpp
 #include<iostream>
 int main() {
 float a=3.14;
-float *pj;
-pj = (float*)&a;
+float *pj = &a;
 std::cout << *pj << '\n';
 }
-```
-2)неверный код
+```  
+
+2) неверный код
 ```cpp
 int main(){
 int a=10, *pj;
@@ -42,7 +42,8 @@ std::cout << pk << '\n';
 std::cout << *pj << '\n';
 }
 ```
-3)неверный код
+
+3) неверный код
 ```cpp
 #include <iostream>
 using namespace std;
@@ -91,33 +92,132 @@ return 0;
 ```cpp
 #include <iostream>
 using namespace std;
-
-// Структура для хранения телефонного номера
 struct Phone {
-    int kod;       // Код города
-    int nom;       // Номер станции
-    int mom_abon;  // Номер абонента
+int kod;       // Код города
+int nom;       // Номер станции
+int mom_abon;  // Номер абонента
 };
-
 int main() {
-    setlocale(LC_ALL, "rus");
-
-    // Инициализация первой структуры
-    Phone my_phone = {212, 767, 8900}; // Мой номер: (212) 767-8900
-
-    // Вторая структура для ввода данных
-    Phone your_phone;
-
-    // Запрос данных от пользователя
-    wcout << L"Введите код города, номер станции и номер абонента: ";
-    cin >> your_phone.kod >> your_phone.nom >> your_phone.mom_abon;
-
-    // Вывод данных
-    wcout << L"Мой номер: (" << my_phone.kod << ") " << my_phone.nom << "-" << my_phone.mom_abon << endl;
-    wcout << L"Ваш номер: (" << your_phone.kod << ") " << your_phone.nom << "-" << your_phone.mom_abon << endl;
-
-    return 0;
+setlocale(LC_ALL, "rus");
+Phone my_phone = {212, 767, 8900}; 
+Phone your_phone;
+wcout << L"Введите код города, номер станции и номер абонента: ";
+cin >> your_phone.kod >> your_phone.nom >> your_phone.mom_abon;
+wcout << L"Мой номер: (" << my_phone.kod << ") " << my_phone.nom << "-" << my_phone.mom_abon << endl;
+wcout << L"Ваш номер: (" << your_phone.kod << ") " << your_phone.nom << "-" << your_phone.mom_abon << endl;
+return 0;
 }
 ```
-5)неверный код
+
+4) неверный код
 ```cpp
+#include <iostream>
+using namespace std;
+int main() {
+setlocale (LC_ALL, "rus" );
+const int n = 5;
+const int m = 10;
+int *a;
+int *b;
+a = new int*[n];
+b = new int*[n];
+for (int i = 0; i < n; i++) {
+a[i] = new int[m];
+b[i] = new int[m];
+cout << &a[i][0] << endl;
+cout << &b[i][0] << endl;
+}
+}
+```
+исправленный код:
+```cpp
+#include <iostream>
+#include <locale>
+using namespace std;
+int main() {
+setlocale (LC_ALL, "rus" );
+const int n = 5;
+const int m = 10;
+int **a;
+int **b;
+a = new int*[n];
+b = new int*[n];
+for (int i = 0; i < n; i++) {
+a[i] = new int[m];
+b[i] = new int[m];
+cout << &a[i][0] << endl;
+cout << &b[i][0] << endl;
+}
+}
+```
+
+5) неверный код
+```cpp
+#include <iostream>
+using namespace std;
+int main() {
+setlocale (LC_ALL, "rus" );
+char s[] = "char s[]: text";
+char* ps = "char* ps: text";
+std::string str = "std::string str: text";
+s = "another text";
+str = "std::string str: another text";
+char *s_1 = "char *s_1: text";
+const char *s_2 = "const char *s_2: text";
+wcout << L"Вывод строк : "
+}
+```
+исправленный код:
+```cpp
+#include <iostream>
+#include <string>
+#include <locale>
+using namespace std;
+int main() {
+setlocale(LC_ALL, "rus");
+string s = "char s[]: text"; 
+char* ps = "char* ps: text";
+string str = "std::string str: text";
+s = "another text"; 
+str = "std::string str: another text";
+char *s_1 = "char *s_1: text";
+const char *s_2 = "const char *s_2: text";
+wcout << L"Вывод строк : " << endl;
+wcout << s << endl; 
+wcout << ps << endl;
+wcout << str << endl;
+wcout << s_1 << endl; 
+wcout << s_2 << endl; 
+return 0;
+}
+```
+
+6) неверный код
+```cpp
+int main() {
+setlocale ();
+wstring s = "I'am an developer";
+wstring
+s1 = s.substr(0, 3),
+s2 = s.substr(1, 3),
+s3 = s.substr(0, s.length()-1),
+s4 = s.substr(1);
+wcout << L"Why is you? : " << s1 s2+s3+s4 << '\n';
+}
+```
+исправленный код:
+```cpp
+#include <iostream>
+#include <string>
+using namespace std;
+int main() {
+string s = "I'am an developer";
+string
+s1 = s.substr(0, 3),
+s2 = s.substr(3, 4),
+s3 = s.substr(7, s.length()-9),
+s4 = s.substr(s.length()-2);
+cout << "Why is you? : " << s1+s2+s3+s4 << '\n';
+}
+```
+
