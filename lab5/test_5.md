@@ -89,4 +89,35 @@ return 0;
 ```
 исправленный код:
 ```cpp
+#include <iostream>
+using namespace std;
 
+// Структура для хранения телефонного номера
+struct Phone {
+    int kod;       // Код города
+    int nom;       // Номер станции
+    int mom_abon;  // Номер абонента
+};
+
+int main() {
+    setlocale(LC_ALL, "rus");
+
+    // Инициализация первой структуры
+    Phone my_phone = {212, 767, 8900}; // Мой номер: (212) 767-8900
+
+    // Вторая структура для ввода данных
+    Phone your_phone;
+
+    // Запрос данных от пользователя
+    wcout << L"Введите код города, номер станции и номер абонента: ";
+    cin >> your_phone.kod >> your_phone.nom >> your_phone.mom_abon;
+
+    // Вывод данных
+    wcout << L"Мой номер: (" << my_phone.kod << ") " << my_phone.nom << "-" << my_phone.mom_abon << endl;
+    wcout << L"Ваш номер: (" << your_phone.kod << ") " << your_phone.nom << "-" << your_phone.mom_abon << endl;
+
+    return 0;
+}
+```
+5)неверный код
+```cpp
