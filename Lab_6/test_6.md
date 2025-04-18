@@ -305,3 +305,251 @@ std::cout << _inputerror.nWeekDay << '\n';
 
 исправленный код:
 ```cpp
+#include <iostream>
+class BufferedIO {
+public:
+enum IOError { None, Access, General, Erro = -1};
+class Date {
+public:   
+unsigned short nWeekDay : 3; // 0..7 (3 bits)
+unsigned short nMonthDay : 6; // 0..31 (6 bits)
+unsigned short nMonth : 5; // 0..12 (5 bits)
+unsigned short nYear : 8; // 0..100 (8 bits)
+};
+// Declare nested class BufferedInput.
+class BufferedInput {
+public:
+BufferedInput() : _inputerror(None) {}
+public:
+int read() {return 0;}
+int Ngood() {
+return _inputerror == Erro;
+}
+private:
+IOError _inputerror;
+};
+// Declare nested class BufferedOutput.
+class BufferedOutput {
+public:
+BufferedOutput() : _inputerror(None) {}
+int Ngood() {
+return _inputerror == Erro;
+}
+private:
+IOError _inputerror;
+};
+};
+
+int main() {
+BufferedIO:: Date _inputerror;
+BufferedIO:: BufferedInput buffIn;
+BufferedIO:: BufferedOutput buffOut;
+
+std::cout << _inputerror.nWeekDay << '\n';
+return 0;
+}
+```
+
+5) неверный код
+```cpp
+class BufferedOutput {
+short BytesWritten() {
+return bytecount;
+}
+static void ResetCount() {
+bytecount = 0;
+}
+static long bytecount;
+};
+int main() {
+BufferedOutput bufOut = new BufferedOutput;
+std::cout << bufOut.bytecount << '\n';
+}
+
+```
+
+исправленный код:
+```cpp
+#include <iostream>
+class BufferedOutput {
+public:
+    short BytesWritten() {
+    return bytecount;
+    }
+    static void ResetCount() {
+    bytecount = 0;
+    }
+    static long bytecount;
+};
+long BufferedOutput :: bytecount=0;
+int main() {
+    BufferedOutput bufOut;
+    std::cout << bufOut.bytecount << '\n';
+    return 0;
+    }
+```
+
+6) неверный код
+```cpp
+class X {
+X(int flag) : m_flag(flag) {}
+bool getFlag() const {
+m_accessCount++;
+return m_flag + m_accessCount;
+}
+private:
+int m_flag;
+int m_accessCount{0};
+};
+int main() {
+X x(new X);
+std::cout << x.getFlag << '\n';
+}
+```
+
+исправленный код:
+```cpp
+#include <iostream>
+class X {
+public:
+X(int flag) : m_flag(flag) {}
+int getFlag() const {
+//m_accessCount++;
+return m_flag + (++m_accessCount);
+}
+private:
+int m_flag;
+mutable int m_accessCount{0};
+};
+
+int main() {
+X x(3);
+std::cout << x.getFlag() << '\n';
+return 0;
+}
+```
+
+7) неверный код
+```cpp
+#include <iostream>
+using namespace std;
+namespace box {
+class Box {
+double length; // Length of a box
+double breadth; // Breadth of a box
+double height; // Height of a box
+} };
+int main() {
+Box Box1; // Declare Box1 of type Box
+Box Box2; // Declare Box2 of type Box
+box::Box Box3(new Box); // Declare Box2 of type Box
+double volume = 0.0; // Store the volume of a box here
+// box 1 specification
+box::Box1.height = 5.0;
+box::Box1.length = 6.0;
+box::Box1.breadth = 7.0;
+// box 2 specification
+box::Box2.height = 10.0;
+box::Box2.length = 12.0;
+box::Box2.breadth = 13.0;
+// volume of box 1
+volume = box::Box1.height * box::Box1.length * box::Box1.breadth;
+cout << "Volume of Box1 : " << volume <<endl;
+// volume of box 2
+volume = box::Box2.height * box::Box2.length * box::Box2.breadth;
+cout << "Volume of Box2 : " << volume <<endl;
+delete box::Box3[];
+}
+```
+
+исправленный код:
+```cpp
+#include <iostream>
+using namespace std;
+namespace box {
+class Box {
+  public:
+    double length; // Length of a box
+    double breadth; // Breadth of a box
+    double height; // Height of a box
+    // Конструктор по умолчанию
+    Box() : length(0), breadth(0), height(0) {}
+        
+    // Конструктор с параметрами
+    Box(double l, double b, double h) : length(l), breadth(b), height(h) {}
+  }; 
+}
+int main() {
+    box::Box Box1; // Declare Box1 of type Box
+    box::Box Box2; // Declare Box2 of type Box
+
+    // box 1 specification
+    Box1.height = 5.0;
+    Box1.length = 6.0;
+    Box1.breadth = 7.0;
+    
+    // box 2 specification
+    Box2.height = 10.0;
+    Box2.length = 12.0;
+    Box2.breadth = 13.0;
+    
+    // volume of box 1
+    double volume = Box1.height * Box1.length * Box1.breadth;
+    cout << "Volume of Box1 : " << volume <<endl;
+    // volume of box 2
+    volume = Box2.height * Box2.length * Box2.breadth;
+    cout << "Volume of Box2 : " << volume <<endl;
+    
+    return 0;
+}
+```
+
+8) неверный код
+```cpp
+class Window {
+public:
+Window(); // Default constructor.
+Window( int x1, int y1, int x2, int y2 ) {} // Constructor specifying Window size.
+bool SetCaption( const char *szTitle ) { return 0; } // Set window caption.
+const char *GetCaption() {} // Get window caption.
+char *szWinCaption; // Window caption.
+};
+// Declare a pointer
+char Window::*pwCaption = &Window::szWinCaption;
+const char * (Window::* pfnwGC)() = Window::GetCaption;
+bool (Window:: pfnwSC)( const char * ) = &Window::SetCaption;
+Window wMainWindow;
+Window pwChildWindow = new Window;
+char *szUntitled = "Untitled - ";
+int cUntitledLen = strlen(szUntitled);
+int main() {
+}
+```
+
+исправленный код:
+```cpp
+#include <iostream>
+class Window {
+public:
+Window(); // Default constructor.
+Window( int x1, int y1, int x2, int y2 ) {} // Constructor specifying Window size.
+bool SetCaption( const char *szTitle ) { return 0; } // Set window caption.
+const char *GetCaption() {return szWinCaption; } // Get window caption.
+char *szWinCaption; // Window caption.
+};
+
+// Declare a pointer
+char* Window::*pwCaption = &Window::szWinCaption;
+
+const char * (Window::* pfnwGC)() = &Window::GetCaption;
+
+bool (Window:: *pfnwSC)( const char * ) = &Window::SetCaption;
+
+Window wMainWindow;
+Window* pwChildWindow = new Window;
+const char *szUntitled = "Untitled - ";
+int cUntitledLen = strlen(szUntitled);
+
+int main() {
+}
+```
