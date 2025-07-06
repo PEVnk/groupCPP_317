@@ -139,3 +139,163 @@ std::cout << "/: " << (dollars1 + 3).getDollars() << " dollars." << std::endl;
 }
 ```
 
+4) неверный код
+```cpp
+Сделайте код программы рабочим, причем элементы массива выводим с использованием цикла foreach.
+#include <iostream>
+int sumArray(int array) {
+int result = 0;
+for (const auto &number : array)
+result += number;
+return result;
+}
+int main() {
+int array[7] = { 10, 8, 6, 5, 4, 3, 1 };
+std::cout << sumArray(array);
+return 0;
+}
+```
+
+исправленный код:
+```cpp
+#include <iostream>
+
+int sumArray(int* array, size_t size) {
+int result = 0;
+for (size_t i = 0; i < size; ++i) {
+        result += array[i];
+    }
+    return result;
+}
+int main() {
+int array[7] = { 10, 8, 6, 5, 4, 3, 1 };
+std::cout << "Sum: " << sumArray(array, 7) << std::endl;
+return 0;
+}
+```
+
+4) неверный код
+```cpp
+Найдите ошибки в коде, чтобы программа представленная ниже заработала, можно только добавлять что-то, но убирать нельзя.
+void (*pfunc)();
+void print(int i) {
+std::cout << i << " ";
+}
+int main() {
+int data[]{1,2,3,4,5};
+int len = sizeof(data)/sizeof(data[0]);
+std::for_each(data, data+len, pfunc);
+return 0;
+}
+```
+
+исправленный код:
+```cpp
+#include <iostream>
+#include <algorithm>
+
+void print(int i) {
+std::cout << i << " ";
+}
+void (*pfunc)(int)= print;
+
+int main() {
+int data[]{1,2,3,4,5};
+int len = sizeof(data)/sizeof(data[0]);
+std::for_each(data, data+len, pfunc);
+return 0;
+}
+```
+5) неверный код
+```cpp
+Найдите ошибки в коде, чтобы программа представленная ниже заработала, можно только добавлять что-то, но убирать нельзя.
+class Number {
+private:
+int m_number;
+Number(int number=0): m_number(number) {}
+Number& operator++();
+Number& operator--();
+Number operator++(int);
+Number operator--(int);
+friend std::ostream& operator<< (std::ostream &out, const Number &n);
+}
+Number ::operator++() {
+++m_number;
+return *this;
+}
+Number operator--(){
+--m_number;
+return *this;
+}
+Number Number::operator++(int){
+Number temp(m_number);
+++(*this);
+return temp;
+}
+Number Number::operator--(int){
+Number temp(m_number);
+--(*this);
+return temp;
+}
+std::ostream& operator<< (std::ostream &out, const Number &d){
+out << d.m_number << "\n";
+return out;
+}
+int main(){
+Number number(6);
+std::cout << ++number;
+std::cout << number++;
+std::cout << number;
+std::cout << --number;
+std::cout << number--;
+std::cout << number;
+}
+```
+
+исправленный код:
+```cpp
+#include <iostream>
+
+class Number {
+private:
+int m_number;
+public: 
+Number(int number=0): m_number(number) {}
+Number& operator++();
+Number& operator--();
+Number operator++(int);
+Number operator--(int);
+friend std::ostream& operator<< (std::ostream &out, const Number &n);
+};
+Number& Number ::operator++() {
+++m_number;
+return *this;
+}
+Number& Number::operator--(){
+--m_number;
+return *this;
+}
+Number Number::operator++(int){
+Number temp(m_number);
+++(*this);
+return temp;
+}
+Number Number::operator--(int){
+Number temp(m_number);
+--(*this);
+return temp;
+}
+std::ostream& operator<< (std::ostream &out, const Number &d){
+out << d.m_number << "\n";
+return out;
+}
+int main(){
+Number number(6);
+std::cout << ++number;
+std::cout << number++;
+std::cout << number;
+std::cout << --number;
+std::cout << number--;
+std::cout << number;
+}
+```
