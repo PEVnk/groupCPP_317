@@ -141,7 +141,6 @@ std::cout << "/: " << (dollars1 + 3).getDollars() << " dollars." << std::endl;
 
 4) неверный код
 ```cpp
-Сделайте код программы рабочим, причем элементы массива выводим с использованием цикла foreach.
 #include <iostream>
 int sumArray(int array) {
 int result = 0;
@@ -176,7 +175,6 @@ return 0;
 
 4) неверный код
 ```cpp
-Найдите ошибки в коде, чтобы программа представленная ниже заработала, можно только добавлять что-то, но убирать нельзя.
 void (*pfunc)();
 void print(int i) {
 std::cout << i << " ";
@@ -208,7 +206,6 @@ return 0;
 ```
 5) неверный код
 ```cpp
-Найдите ошибки в коде, чтобы программа представленная ниже заработала, можно только добавлять что-то, но убирать нельзя.
 class Number {
 private:
 int m_number;
@@ -297,5 +294,68 @@ std::cout << number;
 std::cout << --number;
 std::cout << number--;
 std::cout << number;
+}
+```
+
+6) неверный код
+```cpp
+int main() {
+std::vector<int> numbers = { 1, 2, 3, 4, 5 };
+for (int n : numbers)
+std::cout << n << "\t";
+std::cout << std::endl;
+for (auto iter = begin(); iter != end(); iter++) {
+std::cout << *iter << "\t";
+}
+}
+```
+
+исправленный код:
+```cpp
+#include <iostream>
+#include <vector>  
+
+int main() {
+std::vector<int> numbers = { 1, 2, 3, 4, 5 };
+for (int n : numbers)
+std::cout << n << "\t";
+std::cout << std::endl;
+for (auto iter = numbers.begin(); iter != numbers.end(); iter++) {
+std::cout << *iter << "\t";
+}
+return 0;  
+}
+```
+
+7) неверный код
+```cpp
+int main() {
+std::list<int> li;
+for (int nCount = 0; nCount < 5; ++nCount)
+li.push_back(nCount);
+std::list<int>::iter it;
+it = min_element(li.begin(), li.end());
+std::cout << "min: " << it << ' ';
+it = max_element(li.begin(), li.end());
+std::cout << "max: " << it << ' ';
+}
+```
+исправленный код:
+```cpp
+#include <iostream>
+#include <list>
+#include <algorithm>
+
+int main() {
+std::list<int> li;
+for (int nCount = 0; nCount < 5; ++nCount)
+li.push_back(nCount);
+std::list<int>::iterator it;
+it = std::min_element(li.begin(), li.end());
+std::cout << "min: " << *it << ' ';
+it = std::max_element(li.begin(), li.end());
+std::cout << "max: " << *it << ' ';
+
+return 0;  
 }
 ```
